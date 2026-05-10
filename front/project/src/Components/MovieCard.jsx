@@ -1,25 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom'; // 1. Импортируем Link
 
-function MovieCard({ movie }) {
-
-  if (!movie) return null;
-
+const MovieCard = ({ movie }) => {
   return (
-    <section className='flex-none'>
+    // 2. Оборачиваем всё в Link. Путь должен совпадать с тем, что в App.jsx
+    <Link to={`/movie/${movie.id}`}> 
+      <div className="relative hover:scale-110 transition-all duration-300 cursor-pointer">
         <img 
-            src={movie.image} 
-            alt={movie.title}
-            className='w-[110px] md:w-[220px] h-[170px] md:h-[330px] 
-            object-cover rounded-xl shadow-lg
-            cursor-pointer
-            hover:border-[4px] border-gray-400
-            hover:scale-105 transition-all duration-200 ease-in-out'/>
-        <h2 className='text-gray-200 mt-2 text-[14px] md:text-[16px] 
-        font-medium w-[110px] md:w-[220px] text-center'>
-            {movie.title}
+          src={movie.image} 
+          alt={movie.title} 
+          className="w-[110px] md:w-[200px] rounded-lg object-cover shadow-lg border-[3px] border-transparent hover:border-gray-400"
+        />
+        <h2 className="text-white mt-2 text-[12px] md:text-[14px] font-semibold text-center truncate w-[110px] md:w-[200px]">
+          {movie.title}
         </h2>
-    </section>
-  )
-}
+      </div>
+    </Link>
+  );
+};
 
-export default MovieCard
+export default MovieCard;
