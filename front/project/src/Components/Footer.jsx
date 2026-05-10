@@ -16,28 +16,21 @@ const Footer = () => {
               <p className="text-gray-400 text-sm italic">
                 Subscribe to our newsletter for the latest updates.
               </p>
-              <div className="flex gap-2">
-                <input 
-                  type="email" 
-                  placeholder="Your email" 
-                  className="bg-gray-900 border border-gray-800 text-white text-sm px-4 py-2 rounded-md focus:outline-none focus:border-blue-500 w-full transition-all"
-                />
-                <button className="bg-white text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-200 transition-colors">
-                  Join
-                </button>
-              </div>
+<div className="flex gap-2">
+      <input 
+        id="footer-email" // Добавили id
+        type="email" 
+        placeholder="Your email" 
+        className="bg-gray-900 border border-gray-800 text-white text-sm px-4 py-2 rounded-md focus:outline-none focus:border-blue-500 w-full transition-all"
+      />
+      <button 
+        onClick={handleSubscribe} // Добавили обработчик
+        className="bg-white text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-200 transition-colors"
+      >
+        Join
+      </button>
+    </div>
             </div>
-          </div>
-
-          {/* Column 2: Navigation */}
-          <div className="flex flex-col gap-6">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500">Navigation</h3>
-            <ul className="flex flex-col gap-3 text-gray-400 text-sm">
-              <li className="hover:text-white cursor-pointer transition-colors">Home</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Movies</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Series</li>
-              <li className="hover:text-white cursor-pointer transition-colors">New Releases</li>
-            </ul>
           </div>
 
           {/* Column 3: Support */}
@@ -46,8 +39,6 @@ const Footer = () => {
             <ul className="flex flex-col gap-3 text-gray-400 text-sm">
               <li className="hover:text-white cursor-pointer transition-colors">FAQ</li>
               <li className="hover:text-white cursor-pointer transition-colors">Privacy Policy</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Terms of Service</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Contact Us</li>
             </ul>
           </div>
 
