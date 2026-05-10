@@ -1,37 +1,73 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { allMovies } from '../Data'; // Твой файл с данными
+import React, { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { allMovies } from '../Data' // Убедись, что путь к Data.js верный
 
 const MovieDetail = () => {
-  const { id } = useParams(); // Достаем ID из ссылки
+  const { id } = useParams()
   
-  // Ищем фильм в твоем списке по ID
-  const movie = allMovies.find((m) => m.id === parseInt(id));
+  // Ищем нужный фильм в массиве
+  const movie = allMovies.find((item) => item.id === parseInt(id))
 
-  if (!movie) return <div className="text-white p-20">Movie not found!</div>;
+  // Скроллим страницу вверх при переходе
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [id])
+
+  if (!movie) {
+    return (
+      <div className="h-screen flex items-center justify-center text-white text-2xl font-bold uppercase tracking-widest">
+        Movie not found
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-[#0b0b0b] text-white p-10">
-      <h1 className="text-4xl font-bold mb-6">{movie.title}</h1>
-      
-      {/* Плеер, который теперь один для всех */}
-      <div className="aspect-video w-full bg-gray-900 rounded-2xl border border-gray-800 overflow-hidden shadow-2xl">
+    <div className="min-h-screen bg-[#0b0b0b] text-white px-8 md:px-16 py-10">
+      {/* Заголовок фильма */}
+      <h1 className="text-3xl md:text-5xl font-bold mb-8 uppercase tracking-tighter">
+        {movie.title}
+      </h1>
+
+      {/* Плеер (заглушка с YouTube или видео-заглушка) */}
+      <div className="w-full aspect-video bg-gray-900 rounded-3xl border border-gray-800 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] mb-12">
         <iframe 
-          width="100%" height="100%" 
+          width="100%" 
+          height="100%" 
           src={movie.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ"} 
-          title="Movie Player" frameBorder="0" allowFullScreen
+          title={movie.title}
+          frameBorder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowFullScreen
         ></iframe>
       </div>
 
-      <div className="mt-10 flex gap-8">
-        <img src={movie.image} alt={movie.title} className="w-48 rounded-lg shadow-lg" />
-        <div>
-          <p className="text-blue-500 font-bold underline mb-4">{movie.genre}</p>
-          <p className="text-gray-400 max-w-2xl">{movie.description || "Official LN PRODUCTION release."}</p>
+      {/* Инфо о фильме */}
+      <div className="grid md:grid-cols-3 gap-12">
+        <div className="col-span-1">
+          <img 
+            src={movie.image} 
+            alt={movie.title} 
+            className="w-full rounded-2xl shadow-2xl border border-gray-800"
+          />
+        </div>
+        <div className="col-span-2 flex flex-col gap-6">
+          <div>
+            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Genre</span>
+            <p className="text-2xl text-gray-200">{movie.genre}</p>
+          </div>
+          <div>
+            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Storyline</span>
+            <p className="text-lg text-gray-400 leading-relaxed max-w-3xl">
+              {movie.description || "In a world of constant change, LN PRODUCTION presents a cinematic journey that redefines the genre. Experience the magic of visual storytelling."}
+            </p>
+          </div>
+          <div className="pt-6 border-t border-gray-900">
+            <p className="text-gray-600 text-xs uppercase tracking-widest">Released by LN PRODUCTION © 2026</p>
+          </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MovieDetail;
+export default MovieDetail
