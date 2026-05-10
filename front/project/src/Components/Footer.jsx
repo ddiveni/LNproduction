@@ -1,6 +1,19 @@
 import React from 'react'
 
 const Footer = () => {
+  // 1. ФУНКЦИЯ ДОЛЖНА БЫТЬ ЗДЕСЬ (Внутри компонента Footer, но перед return)
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    const emailInput = document.getElementById('footer-email');
+    
+    if (emailInput && emailInput.value) {
+      alert(`Success! ${emailInput.value} has been added to LN PRODUCTION newsletter.`);
+      emailInput.value = ''; // Очищаем поле
+    } else {
+      alert('Please enter a valid email address.');
+    }
+  };
+
   return (
     <footer className="bg-[#0b0b0b] border-t border-gray-900 pt-16 pb-8 mt-20">
       <div className="max-w-[1440px] mx-auto px-8 md:px-16">
@@ -9,27 +22,28 @@ const Footer = () => {
           
           {/* Column 1: Brand & Newsletter */}
           <div className="flex flex-col gap-6">
-            <h2 className="text-2xl font-bold tracking-tighter text-white">
+            <h2 className="text-2xl font-bold tracking-tighter text-white uppercase">
               LN PRODUCTION
             </h2>
             <div className="flex flex-col gap-4">
               <p className="text-gray-400 text-sm italic">
                 Subscribe to our newsletter for the latest updates.
               </p>
-<div className="flex gap-2">
-      <input 
-        id="footer-email" // Добавили id
-        type="email" 
-        placeholder="Your email" 
-        className="bg-gray-900 border border-gray-800 text-white text-sm px-4 py-2 rounded-md focus:outline-none focus:border-blue-500 w-full transition-all"
-      />
-      <button 
-        onClick={handleSubscribe} // Добавили обработчик
-        className="bg-white text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-200 transition-colors"
-      >
-        Join
-      </button>
-    </div>
+              <form onSubmit={handleSubscribe} className="flex gap-2"> {/* Обернули в form для удобства */}
+                <input 
+                  id="footer-email" 
+                  type="email" 
+                  required
+                  placeholder="Your email" 
+                  className="bg-gray-900 border border-gray-800 text-white text-sm px-4 py-2 rounded-md focus:outline-none focus:border-blue-500 w-full transition-all"
+                />
+                <button 
+                  type="submit"
+                  className="bg-white text-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-gray-200 transition-colors"
+                >
+                  Join
+                </button>
+              </form>
             </div>
           </div>
 
