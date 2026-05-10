@@ -28,12 +28,11 @@ const MovieDetail = () => {
         {movie.title}
       </h1>
 
-      {/* Плеер (заглушка с YouTube или видео-заглушка) */}
       <div className="w-full aspect-video bg-gray-900 rounded-3xl border border-gray-800 overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] mb-12">
         <iframe 
           width="100%" 
           height="100%" 
-          src={movie.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ"} 
+          src={movie.videoUrl || ""} 
           title={movie.title}
           frameBorder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
