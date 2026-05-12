@@ -15,12 +15,12 @@ function Header() {
         {
             название: 'ПОИСК',
             иконка: HiMagnifyingGlass,
-            путь: '/watchlist'
+            путь: '/'
         },
         {
             название: 'МОЙ СПИСОК',
             иконка: HiPlus,
-            путь: '/'
+            путь: '/watchlist'
         }
     ]
 

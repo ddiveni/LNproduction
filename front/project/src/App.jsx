@@ -23,8 +23,6 @@ function App() {
               <GenreMovieList />
             </>
           } />
-
-          {/* Универсальная страница для всех 23+ фильмов */}
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/watchlist" element={<Watchlist />} />
         </Routes>
