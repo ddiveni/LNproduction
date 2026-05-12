@@ -66,7 +66,14 @@ export const sliderPhotos = [
 // 4. ВСЕ ТАЙТЛЫ (ЛОКАЛИЗОВАННЫЕ)
 export const allMovies = [
     // Мультфильмы
-    { id: 1, image: NeZha2, genre: 'Мультфильмы', title: 'Нэчжа: Рождение дьявола 2' },
+    { id: 1, 
+        image: NeZha2, 
+        genre: 'Мультфильмы', 
+        title: 'Нэчжа: Рождение дьявола 2',
+        description: 'Продолжение захватывающей истории о мальчике, рожденном из жемчужины хаоса. Ему предстоит столкнуться с новыми врагами и осознать свою истинную судьбу.',
+        rating: '8.4',
+        actors: 'Янь Хао, Лю Ифэй, Чжан Имоу',
+        country: 'Китай 🇨🇳'},
     { id: 2, image: Spongebob, genre: 'Мультфильмы', title: 'Губка Боб: Поиск квадратных штанов' },
     { id: 3, image: Zootopia2, genre: 'Мультфильмы', title: 'Зверополис 2' },
     { id: 4, image: Hoppers, genre: 'Мультфильмы', title: 'Прыгуны' },
@@ -75,7 +82,15 @@ export const allMovies = [
     { id: 7, image: ToyStory5, genre: 'Мультфильмы', title: 'История игрушек 5' },
 
     // Фантастика
-    { id: 8, image: Avatar, descImage: AvatarBack, genre: 'Фантастика', title: 'Аватар: Огонь и пепел' },
+    {id: 8, 
+        image: Avatar, 
+        descImage: AvatarBack, 
+        genre: 'Фантастика', 
+        title: 'Аватар: Огонь и пепел',
+        description: 'Джейк Салли и Нейтири сталкиваются с новым племенем На’ви — "людьми пепла", которые гораздо более агрессивны и опасны, чем те, кого они встречали ранее.',
+        rating: '9.1',
+        actors: 'Сэм Уортингтон, Зои Салдана, Сигурни Уивер',
+        country: 'США 🇺🇸' },
     { id: 9, image: Elio, descImage: ElioBack, genre: 'Фантастика', title: 'Элио' },
     { id: 10, image: Interstellar, descImage: InterstellarBack, genre: 'Фантастика', title: 'Интерстеллар' },
     { id: 11, image: Mickey17, descImage: Mickey17Back, genre: 'Фантастика', title: 'Микки 17' },
