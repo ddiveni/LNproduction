@@ -3,16 +3,15 @@ import { allMovies, GENRE_LIST } from '../Data'
 import MovieCard from './MovieCard'
 import HrMovieCard from './HrMovieCard'
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom'; // 1. Обязательно импортируем Link
 
 function MovieList({ genreId, index_genre }) {
     const [movieList, setMovieList] = useState([]);
     const elementRef = useRef(null);
 
-    // 0 и 3 — горизонтальные, 1 и 2 — вертикальные
     const isHorizontal = index_genre === 0 || index_genre === 3;
 
     useEffect(() => {
-        // Фильтруем все фильмы, которые есть в Data.js для этого жанра
         const filtered = allMovies.filter(item => {
             return item.genre.toLowerCase() === GENRE_LIST[genreId - 1].name.toLowerCase();
         });
@@ -35,13 +34,13 @@ function MovieList({ genreId, index_genre }) {
             <div ref={elementRef} className='flex overflow-x-auto gap-8 
             scrollbar-hide scroll-smooth pt-5 px-3 pb-5'>
                 {movieList.map((item, index) => (
-                    <React.Fragment key={index}>
-                       {isHorizontal ? 
-                        <HrMovieCard movie={item} /> : 
-                        // Для вертикальных рядов подставляем descImage (высокий постер)
-                        <MovieCard movie={{...item, image: item.descImage || item.image}} /> 
-                       }
-                    </React.Fragment>
+                    // 2. Оборачиваем всё содержимое в Link и передаем id фильма
+                    <Link to={`/movie/${item.id}`} key={index} className="hover:scale-110 transition-all duration-300">
+                        {isHorizontal ? 
+                         <HrMovieCard movie={item} /> : 
+                         <MovieCard movie={{...item, image: item.descImage || item.image}} /> 
+                        }
+                    </Link>
                 ))}
             </div>
 
