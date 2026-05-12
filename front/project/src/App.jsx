@@ -6,6 +6,7 @@ import ProductionHouse from './Components/ProductionHouse'
 import GenreMovieList from './Components/GenreMovieList'
 import Footer from './Components/Footer'
 import MovieDetail from './Components/MovieDetail'
+import Watchlist from './Components/WatchList'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
           {/* Универсальная страница для всех 23+ фильмов */}
           <Route path="/movie/:id" element={<MovieDetail />} />
+          <Route path="/watchlist" element={<Watchlist />} />
         </Routes>
 
         <Footer />

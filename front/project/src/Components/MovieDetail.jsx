@@ -51,17 +51,17 @@ const MovieDetail = () => {
         </div>
         <div className="col-span-2 flex flex-col gap-6">
           <div>
-            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Genre</span>
+            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Жанры</span>
             <p className="text-2xl text-gray-200">{movie.genre}</p>
           </div>
           <div>
-            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Storyline</span>
+            <span className="text-blue-500 font-bold uppercase tracking-widest text-sm">Сюжет</span>
             <p className="text-lg text-gray-400 leading-relaxed max-w-3xl">
               {movie.description || "In a world of constant change, LN PRODUCTION presents a cinematic journey that redefines the genre. Experience the magic of visual storytelling."}
             </p>
           </div>
           <div className="pt-6 border-t border-gray-900">
-            <p className="text-gray-600 text-xs uppercase tracking-widest">Released by LN PRODUCTION © 2026</p>
+            <p className="text-gray-600 text-xs uppercase tracking-widest">Выпущено LN PRODUCTION © 2026</p>
           </div>
         </div>
       </div>

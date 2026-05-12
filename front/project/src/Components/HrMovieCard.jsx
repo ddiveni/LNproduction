@@ -4,7 +4,6 @@ function HrMovieCard({ movie }) {
   return (
     <section className='flex-none transition-all duration-300 ease-in-out cursor-pointer hover:scale-110 pb-2'>
         <img 
-            // Берем горизонтальное фото, если его нет — обычное
             src={movie.descImage || movie.image} 
             alt={movie.title}
             className='w-[110px] md:w-[260px] h-[70px] md:h-[140px] 

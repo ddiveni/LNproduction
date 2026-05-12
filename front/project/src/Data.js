@@ -1,4 +1,4 @@
-// 1. ИМПОРТЫ (Строго по твоей папке)
+// 1. ИМПОРТЫ (Оставляем как есть, чтобы не сломать пути)
 import NeZha2 from './assets/Images/NeZha2.jpg';
 import Spongebob from './assets/Images/Spongebob.jpg';
 import Zootopia2 from './assets/Images/Zootopia2.jpg';
@@ -39,15 +39,16 @@ import TheDrama from './assets/Images/TheDrama.jpg';
 import Michael from './assets/Images/Michael.jpg';
 import Eternity from './assets/Images/Eternity.jpg';
 
+// 2. СПИСОК ЖАНРОВ (Переведено)
 export const GENRE_LIST = [
-    { id: 1, name: 'Animation' },
-    { id: 2, name: 'Sci-Fi' },
-    { id: 3, name: 'Thriller' },
-    { id: 4, name: 'Drama' }
+    { id: 1, name: 'Мультфильмы' },
+    { id: 2, name: 'Фантастика' },
+    { id: 3, name: 'Триллеры' },
+    { id: 4, name: 'Драмы' }
 ];
 
 export const sliderPhotos = [
-{ id: 1, image: Yearslater28, position: 'object-center' },
+    { id: 1, image: Yearslater28, position: 'object-center' },
     { id: 2, image: Avatar, position: 'object-[center_40%]' },
     { id: 3, image: Elio, position: 'object-[center_20%]' },
     { id: 4, image: Hoppers, position: 'object-center' },
@@ -60,36 +61,37 @@ export const sliderPhotos = [
     { id: 11, image: Spongebob, position: 'object-[center_20%]' },
     { id: 12, image: Zootopia2, position: 'object-center' },
 ];
+
 export const allMovies = [
-    // Animation
-    { id: 1, image: NeZha2, genre: 'Animation', title: 'Ne Zha 2' },
-    { id: 2, image: Spongebob, genre: 'Animation', title: 'SpongeBob' },
-    { id: 3, image: Zootopia2, genre: 'Animation', title: 'Zootopia 2' },
-    { id: 4, image: Hoppers, genre: 'Animation', title: 'Hoppers' },
-    { id: 5, image: Moana2, genre: 'Animation', title: 'Moana 2' },
-    { id: 6, image: SpiderVerse, genre: 'Animation', title: 'Spider-Verse' },
-    { id: 7, image: ToyStory5, genre: 'Animation', title: 'Toy Story 5' },
+    // Мультфильмы (Animation)
+    { id: 1, image: NeZha2, genre: 'Мультфильмы', title: 'Нэчжа 2' },
+    { id: 2, image: Spongebob, genre: 'Мультфильмы', title: 'Губка Боб' },
+    { id: 3, image: Zootopia2, genre: 'Мультфильмы', title: 'Зверополис 2' },
+    { id: 4, image: Hoppers, genre: 'Мультфильмы', title: 'Прыгуны' },
+    { id: 5, image: Moana2, genre: 'Мультфильмы', title: 'Моана 2' },
+    { id: 6, image: SpiderVerse, genre: 'Мультфильмы', title: 'Через вселенные' },
+    { id: 7, image: ToyStory5, genre: 'Мультфильмы', title: 'История игрушек 5' },
 
-    // Sci-Fi
-    { id: 8, image: Avatar, descImage: AvatarBack, genre: 'Sci-Fi', title: 'Avatar' },
-    { id: 9, image: Elio, descImage: ElioBack, genre: 'Sci-Fi', title: 'Elio' },
-    { id: 10, image: Interstellar, descImage: InterstellarBack, genre: 'Sci-Fi', title: 'Interstellar' },
-    { id: 11, image: Mickey17, descImage: Mickey17Back, genre: 'Sci-Fi', title: 'Mickey 17' },
-    { id: 12, image: Superman, descImage: SupermanBack, genre: 'Sci-Fi', title: 'Superman' },
-    { id: 13, image: TronAres, descImage: TronAresBack, genre: 'Sci-Fi', title: 'Tron: Ares' },
-    { id: 14, image: HailMary, descImage: HailMaryBack, genre: 'Sci-Fi', title: 'Hail Mary'},
+    // Фантастика (Sci-Fi)
+    { id: 8, image: Avatar, descImage: AvatarBack, genre: 'Фантастика', title: 'Аватар' },
+    { id: 9, image: Elio, descImage: ElioBack, genre: 'Фантастика', title: 'Элио' },
+    { id: 10, image: Interstellar, descImage: InterstellarBack, genre: 'Фантастика', title: 'Интерстеллар' },
+    { id: 11, image: Mickey17, descImage: Mickey17Back, genre: 'Фантастика', title: 'Микки 17' },
+    { id: 12, image: Superman, descImage: SupermanBack, genre: 'Фантастика', title: 'Супермен' },
+    { id: 13, image: TronAres, descImage: TronAresBack, genre: 'Фантастика', title: 'Трон: Арес' },
+    { id: 14, image: HailMary, descImage: HailMaryBack, genre: 'Фантастика', title: 'Проект «Аве Мария»'},
 
-    // Thriller
-    { id: 14, image: Yearslater28, descImage: Yearslater28Back, genre: 'Thriller', title: '28 Years Later' },
-    { id: 15, image: Sinners, descImage: SinnersBack, genre: 'Thriller', title: 'Sinners' },
-    { id: 16, image: BlackPhone2, descImage: BlackPhone2Back, genre: 'Thriller', title: 'Black Phone 2' },
-    { id: 17, image: WolfMan, descImage: WolfManBack, genre: 'Thriller', title: 'Wolf Man' },
-    { id: 18, image: FinalDestination, descImage: FinalDestinationBack, genre: 'Thriller', title: 'Final Destination' },
+    // Триллеры (Thriller)
+    { id: 15, image: Yearslater28, descImage: Yearslater28Back, genre: 'Триллеры', title: '28 лет спустя' },
+    { id: 16, image: Sinners, descImage: SinnersBack, genre: 'Триллеры', title: 'Грешники' },
+    { id: 17, image: BlackPhone2, descImage: BlackPhone2Back, genre: 'Триллеры', title: 'Черный телефон 2' },
+    { id: 18, image: WolfMan, descImage: WolfManBack, genre: 'Триллеры', title: 'Человек-волк' },
+    { id: 19, image: FinalDestination, descImage: FinalDestinationBack, genre: 'Триллеры', title: 'Пункт назначения' },
 
-    // Drama
-    { id: 19, image: Kpophunters, genre: 'Drama', title: 'K-Pop Hunters' },
-    { id: 20, image: Martysuprem, genre: 'Drama', title: 'Marty Supreme' },
-    { id: 21, image: TheDrama, genre: 'Drama', title: 'The Drama' },
-    { id: 22, image: Michael, genre: 'Drama', title: 'Michael' },
-    { id: 23, image: Eternity, genre: 'Drama', title: 'Eternity' }
+    // Драмы (Drama)
+    { id: 20, image: Kpophunters, genre: 'Драмы', title: 'Охотники за K-Pop' },
+    { id: 21, image: Martysuprem, genre: 'Драмы', title: 'Марти Суприм' },
+    { id: 22, image: TheDrama, genre: 'Драмы', title: 'Драма' },
+    { id: 23, image: Michael, genre: 'Драмы', title: 'Майкл' },
+    { id: 24, image: Eternity, genre: 'Драмы', title: 'Вечность' }
 ];
