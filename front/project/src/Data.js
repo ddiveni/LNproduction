@@ -54,7 +54,7 @@ export const sliderPhotos = [
     { id: 3, image: Elio, position: 'object-[center_20%]' },
     { id: 4, image: Hoppers, position: 'object-center' },
     { id: 5, image: Kpophunters, position: 'object-center' },
-    { id: 6, image: Martysuprem, position: 'object-[center_20%]' },
+    { id: 6, image: Martysuprem, position: 'object-[center]' },
     { id: 7, image: NeZha2, position: 'object-[center_80%]' },
     { id: 8, image: HailMary, position: 'object-center' },
     { id: 9, image: Sinners, position: 'object-top' },
