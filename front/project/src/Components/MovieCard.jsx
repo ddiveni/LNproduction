@@ -7,7 +7,7 @@ const MovieCard = ({ movie }) => {
     <Link to={`/movie/${movie.id}`}> 
       <div className="relative hover:scale-110 transition-all duration-300 cursor-pointer">
         <img 
-          src={movie.image} 
+src={movie.genre?.includes('фантастика') || movie.genre?.includes('триллер') ? movie.image : movie.descImage}
           alt={movie.title} 
           className="w-[110px] md:w-[200px] rounded-lg object-cover shadow-lg border-[3px] border-transparent hover:border-gray-400"
         />
