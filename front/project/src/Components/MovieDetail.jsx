@@ -1,104 +1,168 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import { allMovies } from '../Data'
-import { HiBookmark, HiOutlineBookmark } from "react-icons/hi2"; // Импортируем иконки
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { allMovies } from '../Data';
+import { IoPlaySharp, IoBookmarkOutline, IoBookmark, IoStar, IoTimeOutline } from "react-icons/io5";
 
-const MovieDetail = () => {
-  const { id } = useParams();
-  const movie = allMovies.find(m => m.id === parseInt(id));
+function MovieDetail() {
+    const { id } = useParams();
+    const [movie, setMovie] = useState(null);
+    const [isWatchlist, setIsWatchlist] = useState(false);
 
-  // Состояние: добавлен ли фильм в список
-  const [isAdded, setIsAdded] = useState(false);
+    useEffect(() => {
+        const selectedMovie = allMovies.find(m => m.id === parseInt(id));
+        setMovie(selectedMovie);
 
-  // Проверяем при загрузке, есть ли этот фильм в LocalStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('ln_watchlist');
-    if (saved) {
-      const watchlist = JSON.parse(saved);
-      const exists = watchlist.some(item => item.id === movie?.id);
-      setIsAdded(exists);
-    }
-  }, [movie]);
-
-  // Функция добавления/удаления
-  const toggleWatchlist = () => {
-    const saved = localStorage.getItem('ln_watchlist') || '[]';
-    let watchlist = JSON.parse(saved);
-
-    if (isAdded) {
-      // Удаляем
-      watchlist = watchlist.filter(item => item.id !== movie.id);
-      setIsAdded(false);
-    } else {
-      // Добавляем
-      watchlist.push(movie);
-      setIsAdded(true);
-    }
-
-    localStorage.setItem('ln_watchlist', JSON.stringify(watchlist));
-  };
-
-  if (!movie) return <div className='p-20 text-white text-center font-bold'>Тайтл не найден</div>;
-
-  return (
-    <div className='p-6 md:p-20 min-h-screen bg-[#0b0b0b] text-white'>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
+        // СРАЗУ проверяем, есть ли этот фильм в списке сохраненных в памяти
+        const saved = localStorage.getItem('ln_watchlist');
+        if (saved) {
+            const list = JSON.parse(saved);
+            setIsWatchlist(list.some(item => item.id === parseInt(id)));
+        }
         
-        {/* Постер */}
-        <div className="relative group">
-            <img src={movie.image} className='w-full rounded-3xl shadow-2xl border border-white/5 object-cover' alt={movie.title} />
-            {/* Кнопка-флажок прямо на постере */}
-            <button 
-                onClick={toggleWatchlist}
-                className={`absolute top-4 right-4 p-4 rounded-2xl backdrop-blur-md transition-all ${
-                    isAdded ? 'bg-blue-600 text-white' : 'bg-black/40 text-white hover:bg-black/60'
-                }`}
-            >
-                {isAdded ? <HiBookmark size={28} /> : <HiOutlineBookmark size={28} />}
-            </button>
-        </div>
+        window.scrollTo(0, 0); // Прокрутка вверх при переходе
+    }, [id]);
 
-        {/* Инфо */}
-        <div className='col-span-2 flex flex-col gap-8'>
-          <div className="space-y-2">
-            <h1 className='text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none italic'>
-                {movie.title}
-            </h1>
-            <div className='flex items-center gap-4 text-sm font-bold uppercase tracking-widest text-gray-500'>
-                <span className="text-green-500 bg-green-500/10 px-2 py-0.5 rounded border border-green-500/20">
-                    {movie.rating || '8.5'}
-                </span>
-                <span>{movie.country || 'США'}</span>
-                <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
-                <span className="text-blue-500">{movie.genre}</span>
+    // ФУНКЦИЯ ДОБАВЛЕНИЯ/УДАЛЕНИЯ (Рабочая на 100%)
+    const toggleWatchlist = () => {
+        const saved = localStorage.getItem('ln_watchlist') || '[]';
+        let list = JSON.parse(saved);
+
+        if (isWatchlist) {
+            list = list.filter(item => item.id !== movie.id);
+        } else {
+            list.push(movie);
+        }
+
+        localStorage.setItem('ln_watchlist', JSON.stringify(list));
+        setIsWatchlist(!isWatchlist);
+    };
+
+    if (!movie) return <div className='text-white p-20 text-center font-bold'>Загрузка данных...</div>;
+
+    return (
+        <div className='relative min-h-screen bg-[#0b0b0b] text-white overflow-x-hidden'>
+            
+            {/* 1. ФОНОВЫЙ ЗАДНИК (Задний план) */}
+            <div className='absolute top-0 left-0 w-full h-[100vh] -z-10'>
+                <img 
+                    src={movie.image} 
+                    className='w-full h-full object-cover opacity-20 fixed blur-[4px] scale-110' 
+                    alt="background" 
+                />
+                <div className='absolute inset-0 bg-gradient-to-t from-[#0b0b0b] via-[#0b0b0b]/60 to-transparent'></div>
             </div>
-          </div>
 
-          <div className="max-w-2xl">
-            <h3 className='text-white/30 font-bold uppercase text-xs tracking-[0.2em] mb-3'>Сюжетная линия</h3>
-            <p className='text-lg md:text-xl text-gray-300 leading-relaxed font-medium'>
-              {movie.description || "В мире постоянных перемен LN PRODUCTION представляет кинематографическое путешествие, которое переопределяет жанр. Испытайте магию визуального повествования."}
-            </p>
-          </div>
+            <div className='relative z-10 pt-28 px-6 md:px-20 pb-20'>
+                <div className='flex flex-col lg:flex-row gap-16'>
+                    
+                    {/* ЛЕВАЯ КОЛОНКА: ГОРИЗОНТАЛЬНЫЙ ПОСТЕР И ПЛЕЕР */}
+                    <div className='w-full lg:w-[600px] shrink-0'>
+                        {/* Постер на переднем плане */}
+                        <div className='relative shadow-[0_0_50px_rgba(0,0,0,0.8)] group'>
+                            <img 
+                                src={movie.descImage} 
+                                className='w-full rounded-3xl border border-white/10 object-cover' 
+                                alt="poster"
+                            />
+                            {/* РАБОЧИЙ ФЛАЖОК */}
+                            <button 
+                                onClick={toggleWatchlist}
+                                className='absolute top-6 right-6 bg-black/60 backdrop-blur-md p-4 rounded-2xl hover:scale-110 active:scale-95 transition-all border border-white/20'
+                            >
+                                {isWatchlist ? 
+                                    <IoBookmark className='text-blue-500 text-3xl' /> : 
+                                    <IoBookmarkOutline className='text-white text-3xl' />
+                                }
+                            </button>
+                        </div>
 
-          <div className="flex flex-col md:flex-row gap-4 mt-4">
-            <button className='bg-white text-black px-12 py-4 rounded-2xl font-black hover:scale-105 active:scale-95 transition-all uppercase text-sm tracking-widest'>
-                Смотреть
-            </button>
-            <button 
-                onClick={toggleWatchlist}
-                className={`px-8 py-4 rounded-2xl font-bold border transition-all uppercase text-sm tracking-widest flex items-center justify-center gap-3 ${
-                    isAdded ? 'bg-blue-600/10 border-blue-600 text-blue-500' : 'border-gray-800 text-gray-400 hover:border-gray-600'
-                }`}
-            >
-                {isAdded ? <HiBookmark /> : <HiOutlineBookmark />}
-                {isAdded ? 'В списке' : 'Буду смотреть'}
-            </button>
-          </div>
+                        {/* ТРЕЙЛЕР (Вместо кнопки) */}
+                        <div className='mt-10'>
+                            <h3 className='text-xs uppercase tracking-[0.3em] text-gray-500 font-black mb-6 flex items-center gap-3'>
+                                <span className='w-8 h-[2px] bg-blue-600'></span> Официальный трейлер
+                            </h3>
+                            <div className='aspect-video w-full rounded-3xl bg-white/5 border border-white/5 overflow-hidden flex items-center justify-center relative group cursor-pointer'>
+                                <div className='absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all'></div>
+                                <IoPlaySharp className='text-7xl text-white relative z-10 group-hover:scale-125 transition-all' />
+                                <p className='absolute bottom-6 text-xs text-gray-400 font-bold tracking-widest'>НАЖМИТЕ ДЛЯ ПРОСМОТРА</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ПРАВАЯ КОЛОНКА: ИНФОРМАЦИЯ */}
+                    <div className='flex-1'>
+                        <div className='mb-10'>
+                            <h1 className='text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9]'>
+                                {movie.title}
+                            </h1>
+                            <p className='text-xl text-gray-500 font-bold mt-4 italic opacity-80'>
+                                {movie.title_original}
+                            </p>
+                        </div>
+
+                        {/* Награды (Реальные из твоего Data.js) */}
+                        {movie.awards && (
+                            <div className='mb-10 flex items-center gap-4 bg-blue-600/10 border border-blue-600/20 p-5 rounded-2xl'>
+                                <div className='bg-blue-600 p-3 rounded-xl'>
+                                    <IoStar className='text-white text-xl' />
+                                </div>
+                                <div>
+                                    <h4 className='text-[10px] uppercase font-black text-blue-500 tracking-widest'>Награды и премии</h4>
+                                    <p className='text-gray-200 text-sm font-medium'>{movie.awards}</p>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* ХАРАКТЕРИСТИКИ */}
+                        <div className='grid grid-cols-2 md:grid-cols-4 gap-6 mb-12'>
+                            <div className='bg-white/5 p-4 rounded-2xl border border-white/5'>
+                                <span className='block text-[10px] text-gray-500 uppercase font-black mb-1'>Рейтинг LN</span>
+                                <span className='text-2xl font-black text-green-500'>{movie.rating}</span>
+                            </div>
+                            <div className='bg-white/5 p-4 rounded-2xl border border-white/5'>
+                                <span className='block text-[10px] text-gray-500 uppercase font-black mb-1'>Год</span>
+                                <span className='text-xl font-bold'>{movie.year}</span>
+                            </div>
+                            <div className='bg-white/5 p-4 rounded-2xl border border-white/5'>
+                                <span className='block text-[10px] text-gray-500 uppercase font-black mb-1'>Длительность</span>
+                                <span className='text-lg font-bold flex items-center gap-2'><IoTimeOutline /> {movie.duration}</span>
+                            </div>
+                            <div className='bg-white/5 p-4 rounded-2xl border border-white/5'>
+                                <span className='block text-[10px] text-gray-500 uppercase font-black mb-1'>Возраст</span>
+                                <span className='text-xl font-bold'>{movie.age}</span>
+                            </div>
+                        </div>
+
+                        {/* ОПИСАНИЕ */}
+                        <div className='mb-12'>
+                            <h3 className='text-xs uppercase tracking-[0.3em] text-gray-500 font-black mb-6'>Сюжетная линия</h3>
+                            <p className='text-gray-300 text-xl leading-relaxed italic font-light border-l-4 border-blue-600 pl-8'>
+                                «{movie.description}»
+                            </p>
+                        </div>
+
+                        {/* СОСТАВ */}
+                        <div className='space-y-8'>
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+                                <div>
+                                    <h3 className='text-[10px] uppercase tracking-[0.2em] text-gray-500 font-black mb-3'>Режиссер</h3>
+                                    <p className='text-white text-lg font-bold'>{movie.director}</p>
+                                </div>
+                                <div>
+                                    <h3 className='text-[10px] uppercase tracking-[0.2em] text-gray-500 font-black mb-3'>Страна</h3>
+                                    <p className='text-white text-lg font-bold'>{movie.country}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className='text-[10px] uppercase tracking-[0.2em] text-gray-500 font-black mb-3'>В главных ролях</h3>
+                                <p className='text-gray-300 leading-relaxed'>{movie.actors}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    );
 }
 
-export default MovieDetail
+export default MovieDetail;
